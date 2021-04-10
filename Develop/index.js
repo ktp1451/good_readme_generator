@@ -1,18 +1,4 @@
 // TODO: Include packages needed for this application
-
-// TODO: Create an array of questions for user input
-const questions = [];
-
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-
-// TODO: Create a function to initialize app
-function init() {}
-
-// Function call to initialize app
-init();
-
-
 const inquirer = require('inquirer');
 const fs = require('fs');
 const util = require('util');
@@ -20,9 +6,7 @@ const generateMd = require("./utils/generateMarkdown");
 
 // create writeFile function using promises instead of a callback function
 const writeFileAsync = util.promisify(fs.writeFile);
-
-const promptUser = () => {
-  return inquirer.prompt([
+const questions = [
     {
       type: 'input',
       message: 'What is your project title?',
@@ -35,7 +19,7 @@ const promptUser = () => {
     },
     {
       type: 'input',
-      message: 'Is there any special installation instructions',
+      message: 'Is there any special installation instructions?',
       name: 'installation',
     },
     {
@@ -46,7 +30,7 @@ const promptUser = () => {
     {
         type: 'input',
         message: 'What are the contribution guidelines?',
-        name: 'contributing',
+        name: 'contributions',
     },
     {
         type: 'input',
@@ -70,14 +54,16 @@ const promptUser = () => {
     {
       type: 'input',
       message: 'Enter your GitHub Username',
-      name: 'questions',
+      name: 'username',
     },
     {
       type: 'input',
       message: 'What is your email address?',
-      name: 'questions',
+      name: 'email',
     },
-  ]);
+  ]
+  const promptUser = () => {
+    return inquirer.prompt(questions);
 };
 
 const generateHTML = (answers) =>
@@ -93,23 +79,55 @@ const generateHTML = (answers) =>
   <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">Hi! My name is ${answers.name}</h1>
-    <p class="lead">I am from ${answers.location}.</p>
+    <p class="lead">I am from ${answers.title}.</p>
     <h3>Example heading <span class="badge badge-secondary">Contact Me</span></h3>
     <ul class="list-group">
-      <li class="list-group-item">My GitHub username is ${answers.github}</li>
-      <li class="list-group-item">LinkedIn: ${answers.linkedin}</li>
+      <li class="list-group-item">My GitHub username is ${answers.username}</li>
+      <li class="list-group-item">LinkedIn: ${answers.email}</li>
     </ul>
   </div>
 </div>
 </body>
 </html>`;
 
+const generateReadMe = (answers) => `
+# ${answers.title}
+
+## Description
+${answers.description}
+<br>
+## Installation
+${answers.installation}
+<br>
+## Usage
+${answers.usage}
+<br>
+## Contributions
+${answers.contributions}
+<br>
+## Tests
+${answers.tests}
+<br>
+## License
+${answers.license}
+<br>
+## Questions
+${answers.username}, ${answers.email}
+`;
+
 // Bonus using writeFileAsync as a promise
 const init = () => {
   promptUser()
-    .then((answers) => writeFileAsync('index.html', generateHTML(answers)))
-    .then(() => console.log('Successfully wrote to index.html'))
+    .then((answers) => {
+        console.log(answers);
+        writeFileAsync('ReadMe.md', generateReadMe(answers))
+    })
+    .then(() => console.log('Successfully wrote to ReadMe.md'))
     .catch((err) => console.error(err));
 };
 
+// TODO: Create a function to write README file
+function writeToFile(fileName, data) {}
+
+// Function call to initialize app
 init();
