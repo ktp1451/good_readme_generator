@@ -16,6 +16,7 @@ init();
 const inquirer = require('inquirer');
 const fs = require('fs');
 const util = require('util');
+const generateMd = require("./utils/generateMarkdown");
 
 // create writeFile function using promises instead of a callback function
 const writeFileAsync = util.promisify(fs.writeFile);
@@ -24,33 +25,57 @@ const promptUser = () => {
   return inquirer.prompt([
     {
       type: 'input',
-      name: 'name',
-      message: 'What is your name?',
+      message: 'What is your project title?',
+      name: 'title',
     },
     {
       type: 'input',
-      name: 'location',
-      message: 'Where are you from?',
+      message: 'What is your project description?',
+      name: 'description',
     },
     {
       type: 'input',
-      name: 'hobby',
-      message: 'What is your favorite hobby?',
+      message: 'Is there any special installation instructions',
+      name: 'installation',
     },
     {
       type: 'input',
-      name: 'food',
-      message: 'What is your favorite food?',
+      message: 'Is there any usage information?',
+      name: 'usage',
+    },
+    {
+        type: 'input',
+        message: 'What are the contribution guidelines?',
+        name: 'contributing',
+    },
+    {
+        type: 'input',
+        message: 'What are the test instructions?',
+        name: 'tests',
+    },
+    {
+        type: "list",
+        message: "What license should your project have?",
+        name: "license",
+        choices: 
+        [
+            "MIT",
+            "Unlicense",
+            "Apache 2.0",
+            "GNU v3",
+            "BSD 3-Clause",
+            "Mozilla Public License 2.0"
+        ]
     },
     {
       type: 'input',
-      name: 'github',
       message: 'Enter your GitHub Username',
+      name: 'questions',
     },
     {
       type: 'input',
-      name: 'linkedin',
-      message: 'Enter your LinkedIn URL.',
+      message: 'What is your email address?',
+      name: 'questions',
     },
   ]);
 };
