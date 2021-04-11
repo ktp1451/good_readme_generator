@@ -1,17 +1,17 @@
 
-# ReadMe Test
+# Katie's ReadMe Demo
 
 ## Description
-this is a demo of the readme
+Demo for a good ReadMe
 <br>
 ## Installation
 no
 <br>
 ## Usage
-no
+none
 <br>
 ## Contributions
-no contributions
+no contributions as this is a demo
 <br>
 ## Tests
 none
@@ -20,4 +20,4 @@ none
 MIT
 <br>
 ## Questions
-ktp1451, katie@email.com
+ktp1451, ktpatterson14@gmail.com
