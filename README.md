@@ -14,6 +14,8 @@ node index.js
 
 A link is provided to a video that will walk you through the assignment and demonstrates its functionality. 
 
+![](09_good_readme_generator.gif)
+
 ## User Story
 
 ```md
